@@ -19,11 +19,12 @@ A frontend dashboard concept for **ClawSentinel**, an AI-driven security monitor
 - Vanilla JavaScript (no frameworks)
 
 ## Project Structure
+```
 clawsentinel-frontend/
 ├── index.html      # Main dashboard markup
 ├── styles.css       # Styling
 └── app.js           # Dashboard logic & interactivity
-
+```
 
 
 
