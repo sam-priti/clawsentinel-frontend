@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClawSentinel - AI Datacenter Security Dashboard</title>
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <!-- Hexagonal brand logo with paw print -->
+          <svg viewBox="0 0 100 100" class="logo-svg">
+            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M32,60 C32,50 40,46 50,46 C60,46 68,50 68,60 C68,70 59,74 50,74 C41,74 32,70 32,60 Z" fill="currentColor"/>
+            <ellipse cx="28" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(-20 28 42)"/>
+            <ellipse cx="42" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(-5 42 30)"/>
+            <ellipse cx="58" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(5 58 30)"/>
+            <ellipse cx="72" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(20 72 42)"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">ClawSentinel</span>
+          <span class="brand-tagline">AI Datacenter Security</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9" rx="1"/>
+            <rect x="14" y="3" width="7" height="5" rx="1"/>
+            <rect x="14" y="12" width="7" height="9" rx="1"/>
+            <rect x="3" y="16" width="7" height="5" rx="1"/>
+          </svg>
+          Overview
+        </a>
+        <a href="#" class="nav-item" data-page="assets">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2"/>
+            <rect x="2" y="14" width="20" height="8" rx="2"/>
+            <line x1="6" y1="6" x2="6.01" y2="6"/>
+            <line x1="6" y1="18" x2="6.01" y2="18"/>
+            <line x1="20" y1="6" x2="20.01" y2="6"/>
+            <line x1="20" y1="18" x2="20.01" y2="18"/>
+          </svg>
+          Assets
+        </a>
+        <a href="#" class="nav-item" data-page="investigations">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <path d="M11 8v6M8 11h6" stroke-width="1.5"/>
+          </svg>
+          Investigations
+        </a>
+        <a href="#" class="nav-item" data-page="remediation">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            <path d="M12 7v10" stroke-width="1.5" stroke-dasharray="2 2"/>
+          </svg>
+          AI Remediation
+        </a>
+        <a href="#" class="nav-item" data-page="analytics">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          Analytics
+        </a>
+        <a href="#" class="nav-item" data-page="reports">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Reports
+        </a>
+        <a href="#" class="nav-item" data-page="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Settings
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button class="btn-feedback">
+          <svg class="feedback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Give Feedback
+        </button>
+        <div class="system-status">
+          <span class="status-dot healthy"></span>
+          <div class="status-text">
+            <span class="status-title">System Status</span>
+            <span class="status-desc">All Systems Operational</span>
+          </div>
+        </div>
+        <div class="copyright">
+          <span>&copy; 2025 ClawSentinel</span>
+          <span>v1.0.0</span>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- MAIN CONTENT WINDOW -->
+    <main class="main-content">
+      
+      <!-- TOP NAVIGATION -->
+      <header class="top-nav">
+        <div class="top-nav-left">
+          <!-- Dropdown: All Datacenters -->
+          <div class="nav-dropdown" id="datacenter-dropdown">
+            <button class="dropdown-trigger">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="trigger-icon">
+                <rect x="2" y="2" width="20" height="8" rx="2"/>
+                <rect x="2" y="14" width="20" height="8" rx="2"/>
+                <line x1="6" y1="6" x2="6.01" y2="6"/>
+                <line x1="6" y1="18" x2="6.01" y2="18"/>
+              </svg>
+              <span>All Datacenters</span>
+              <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item active">All Datacenters</a>
+              <a href="#" class="dropdown-item">US-East (Virginia)</a>
+              <a href="#" class="dropdown-item">US-West (Oregon)</a>
+              <a href="#" class="dropdown-item">EU-Central (Frankfurt)</a>
+              <a href="#" class="dropdown-item">AP-East (Tokyo)</a>
+            </div>
+          </div>
+          
+          <!-- Dropdown: Last 30 Days -->
+          <div class="nav-dropdown" id="timeframe-dropdown">
+            <button class="dropdown-trigger">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="trigger-icon">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span>Last 30 Days</span>
+              <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="dropdown-menu">
+              <a href="#" class="dropdown-item">Last 24 Hours</a>
+              <a href="#" class="dropdown-item">Last 7 Days</a>
+              <a href="#" class="dropdown-item active">Last 30 Days</a>
+              <a href="#" class="dropdown-item">Last 90 Days</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="top-nav-right">
+          <!-- Notification Icon with badge -->
+          <button class="nav-btn notification-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <span class="badge">12</span>
+          </button>
+          
+          <!-- Help Button -->
+          <button class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </button>
+          
+          <!-- User Profile -->
+          <div class="user-profile">
+            <div class="user-avatar">A</div>
+            <div class="user-info">
+              <span class="user-name">Admin</span>
+              <span class="user-role">Security Team</span>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      </header>
+      
+      <!-- PAGE: OVERVIEW -->
+      <div id="page-overview" class="page-view active">
+        <div class="content-body">
+          <!-- Hero Section -->
+          <section class="hero-section card">
+            <div class="hero-left">
+              <h1 class="hero-title"><span class="blue">Observe.</span> <span class="purple">Correlate.</span><br><span class="white">Decide.</span> <span class="red">Respond.</span></h1>
+              <p class="hero-desc">ClawSentinel continuously correlates health, vulnerabilities, exposure, workload and infrastructure context to identify, prioritize and autonomously remediate security risks across your AI datacenters.</p>
+              <button class="btn-primary" id="btn-hero-investigate">Investigate Top Risk &rarr;</button>
+            </div>
+            
+            <div class="hero-center">
+              <svg class="connection-lines" viewBox="0 0 600 300" preserveAspectRatio="none">
+                <path class="dashed-line" d="M 50,50 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                <path class="dashed-line" d="M 50,100 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                <path class="dashed-line" d="M 50,150 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                <path class="dashed-line" d="M 50,200 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                <path class="dashed-line" d="M 50,250 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                
+                <path class="dashed-line" d="M 550,80 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                <path class="dashed-line" d="M 550,150 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+                <path class="dashed-line" d="M 550,220 L 300,150" stroke="#1e293b" stroke-dasharray="4" stroke-width="2" fill="none"/>
+              </svg>
+
+              <div class="left-nodes">
+                <div class="node-item">
+                  <div class="node-icon green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                  <div class="node-text"><strong>Health</strong><br>System & Anomaly</div>
+                </div>
+                <div class="node-item">
+                  <div class="node-icon red"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
+                  <div class="node-text"><strong>Vulnerabilities</strong><br>CVE & Threat Intel</div>
+                </div>
+                <div class="node-item">
+                  <div class="node-icon orange"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+                  <div class="node-text"><strong>Exposure</strong><br>Attack Surface</div>
+                </div>
+                <div class="node-item">
+                  <div class="node-icon purple"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+                  <div class="node-text"><strong>Workload</strong><br>AI/ML Workloads</div>
+                </div>
+                <div class="node-item">
+                  <div class="node-icon blue"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="2" width="8" height="6" rx="1" ry="1"></rect><rect x="2" y="16" width="8" height="6" rx="1" ry="1"></rect><rect x="14" y="16" width="8" height="6" rx="1" ry="1"></rect><polyline points="12 8 12 12 6 12 6 16"></polyline><polyline points="12 8 12 12 18 12 18 16"></polyline></svg></div>
+                  <div class="node-text"><strong>Network</strong><br>Network & Fabric</div>
+                </div>
+              </div>
+
+              <div class="shield-wrapper">
+                <div class="shield-container">
+                  <div class="shield-glow"></div>
+                  <div class="shield-inner">
+                    <svg viewBox="0 0 100 100" class="logo-svg" style="width: 54px; height: 54px; color: #fff;">
+                      <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="currentColor" stroke-width="4"/>
+                      <path d="M32,60 C32,50 40,46 50,46 C60,46 68,50 68,60 C68,70 59,74 50,74 C41,74 32,70 32,60 Z" fill="currentColor"/>
+                      <ellipse cx="28" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(-20 28 42)"/>
+                      <ellipse cx="42" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(-5 42 30)"/>
+                      <ellipse cx="58" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(5 58 30)"/>
+                      <ellipse cx="72" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(20 72 42)"/>
+                    </svg>
+                  </div>
+                  <div class="shield-footer">
+                    Correlate &bull; Evaluate &bull; Prioritize &bull; Respond
+                  </div>
+                </div>
+              </div>
+
+              <div class="right-nodes">
+                <div class="node-item">
+                  <div class="node-icon red">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                  </div>
+                  <div class="node-text"><strong>Risk Evaluation</strong><br>Real-time Scoring</div>
+                </div>
+                <div class="node-item">
+                  <div class="node-icon purple">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                  </div>
+                  <div class="node-text"><strong>AI Recommendation</strong><br>OpenClaw Decisioning</div>
+                </div>
+                <div class="node-item">
+                  <div class="node-icon green">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                  </div>
+                  <div class="node-text"><strong>Autonomous Response</strong><br>DefenseClaw Execution</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- KPI Grid -->
+          <div class="kpi-grid">
+            <!-- Total Assets -->
+            <div class="kpi-card card">
+              <div class="kpi-header">
+                <span class="kpi-title">TOTAL ASSETS</span>
+              </div>
+              <div class="kpi-main">
+                <span class="kpi-value">10</span>
+                <span class="kpi-desc">Across 1 Datacenter</span>
+              </div>
+              <div class="kpi-trend positive">
+                &uarr; 8% <span class="small-val">vs last 30 days</span>
+              </div>
+              <div class="kpi-chart">
+                <svg viewBox="0 0 100 30" width="100%" height="100%" preserveAspectRatio="none">
+                  <path d="M0,25 Q15,10 30,20 T60,5 T90,15 T100,10" fill="none" stroke="var(--color-info)" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Critical Risks -->
+            <div class="kpi-card card">
+              <div class="kpi-header">
+                <span class="kpi-title">CRITICAL RISKS</span>
+              </div>
+              <div class="kpi-main">
+                <span class="kpi-value">6</span>
+                <span class="kpi-desc">Unmitigated risks</span>
+              </div>
+              <div class="kpi-trend negative">
+                &uarr; 20% <span class="small-val">vs last 30 days</span>
+              </div>
+              <div class="kpi-chart">
+                <svg viewBox="0 0 100 30" width="100%" height="100%" preserveAspectRatio="none">
+                  <path d="M0,25 Q15,20 30,10 T60,25 T90,5 T100,2" fill="none" stroke="var(--color-critical)" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Avg Risk Score -->
+            <div class="kpi-card card">
+              <div class="kpi-header">
+                <span class="kpi-title">AVERAGE RISK SCORE</span>
+              </div>
+              <div class="kpi-main">
+                <span class="kpi-value">8.9<span class="small-val">/ 10</span></span>
+                <span class="kpi-desc">High Risk</span>
+              </div>
+              <div class="kpi-trend orange-text">
+                &uarr; 5% <span class="small-val">vs last 30 days</span>
+              </div>
+              <div class="kpi-chart gauge-container">
+                <svg class="gauge-chart" viewBox="0 0 100 50">
+                  <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="var(--border-color)" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M 10 50 A 40 40 0 0 1 80 20" fill="none" stroke="var(--color-warning)" stroke-width="8" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Active AI Plans -->
+            <div class="kpi-card card">
+              <div class="kpi-header">
+                <span class="kpi-title">ACTIVE AI PLANS</span>
+              </div>
+              <div class="kpi-main">
+                <span class="kpi-value">4</span>
+                <span class="kpi-desc">In Progress</span>
+              </div>
+              <div class="kpi-trend purple-text">
+                &uarr; 10% <span class="small-val">vs last 30 days</span>
+              </div>
+              <div class="kpi-chart">
+                <svg viewBox="0 0 100 30" width="100%" height="100%" preserveAspectRatio="none">
+                  <path d="M0,25 L20,20 L40,15 L60,10 L80,5 L100,2" fill="none" stroke="#a78bfa" stroke-width="2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Middle Row -->
+          <div class="middle-row">
+            <!-- Active Alert Card -->
+            <div class="card border-red" id="overview-alert-card" style="cursor: pointer;">
+              <div class="section-header">
+                <h3 class="red-text">ACTIVE SECURITY ALERT <span class="badge-critical">CRITICAL</span></h3>
+                <a href="#" class="view-all">View All Alerts &rarr;</a>
+              </div>
+              <div class="alert-content">
+                <div class="alert-header">
+                  <div class="hexagon-icon">
+                    <svg viewBox="0 0 100 100" style="width: 32px; height: 32px; color: var(--color-critical);">
+                      <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="currentColor" stroke-width="4"/>
+                      <path d="M32,60 C32,50 40,46 50,46 C60,46 68,50 68,60 C68,70 59,74 50,74 C41,74 32,70 32,60 Z" fill="currentColor"/>
+                      <ellipse cx="28" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(-20 28 42)"/>
+                      <ellipse cx="42" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(-5 42 30)"/>
+                      <ellipse cx="58" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(5 58 30)"/>
+                      <ellipse cx="72" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(20 72 42)"/>
+                    </svg>
+                  </div>
+                  <div class="alert-title-info">
+                    <h2>GPU-DCE-001</h2>
+                    <p>AI Training Cluster &bull; Zone-A &bull; Rack-12</p>
+                  </div>
+                </div>
+                <div class="alert-details">
+                  <div class="detail-col">
+                    <span class="detail-label">RISK SCORE</span>
+                    <span class="detail-value red-text">10.0</span>
+                  </div>
+                  <div class="detail-col">
+                    <span class="detail-label">TOP CVE</span>
+                    <span class="detail-value text-white">CVE-2026-1001 <span class="small-text red-text">9.1</span></span>
+                  </div>
+                  <div class="detail-col">
+                    <span class="detail-label">HEALTH STATUS</span>
+                    <span class="detail-value orange-text">DEGRADED</span>
+                  </div>
+                  <div class="detail-col">
+                    <span class="detail-label">WORKLOAD STATUS</span>
+                    <span class="detail-value green-text">RUNNING</span>
+                  </div>
+                </div>
+              </div>
+              <div class="alert-actions">
+                <div class="action-info">
+                  <div class="info-item">
+                    <span class="info-label">Business Impact</span>
+                    <p>LLM training job may be interrupted in 14 minutes</p>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">Recommended Action</span>
+                    <p class="red-text font-semibold">ISOLATE_AND_PATCH</p>
+                  </div>
+                </div>
+                <button class="btn-outline-red" id="btn-investigate-now">Investigate Now &rarr;</button>
+              </div>
+            </div>
+            
+            <!-- Top Risks Table -->
+            <div class="card">
+              <div class="section-header">
+                <h3>TOP 5 RISKS</h3>
+                <a href="#" class="view-all" id="link-view-all-risks">View All Risks &rarr;</a>
+              </div>
+              <table class="risks-table">
+                <thead>
+                  <tr>
+                    <th>RANK</th>
+                    <th>ASSET</th>
+                    <th>TYPE</th>
+                    <th>RISK SCORE</th>
+                    <th>SEVERITY</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="cursor: pointer;" onclick="viewAssetFromOverview('GPU-DCE-001')">
+                    <td><span class="rank-circle rank-1">1</span></td>
+                    <td>GPU-DCE-001</td>
+                    <td><span class="type-badge type-gpu">GPU</span></td>
+                    <td>
+                      <div class="score-bar"><div class="fill fill-100"></div></div>
+                    </td>
+                    <td><span class="severity-badge critical">CRITICAL</span></td>
+                  </tr>
+                  <tr style="cursor: pointer;" onclick="viewAssetFromOverview('GPU-DCE-002')">
+                    <td><span class="rank-circle rank-2">2</span></td>
+                    <td>GPU-DCE-002</td>
+                    <td><span class="type-badge type-gpu">GPU</span></td>
+                    <td>
+                      <div class="score-bar"><div class="fill fill-97"></div></div>
+                    </td>
+                    <td><span class="severity-badge critical">CRITICAL</span></td>
+                  </tr>
+                  <tr style="cursor: pointer;" onclick="viewAssetFromOverview('CPU-DCE-001')">
+                    <td><span class="rank-circle rank-2">3</span></td>
+                    <td>CPU-DCE-001</td>
+                    <td><span class="type-badge type-cpu">CPU</span></td>
+                    <td>
+                      <div class="score-bar"><div class="fill fill-92"></div></div>
+                    </td>
+                    <td><span class="severity-badge critical">CRITICAL</span></td>
+                  </tr>
+                  <tr style="cursor: pointer;" onclick="viewAssetFromOverview('LEAF-DCE-001')">
+                    <td><span class="rank-circle rank-3">4</span></td>
+                    <td>LEAF-DCE-001</td>
+                    <td><span class="type-badge type-network">NETWORK</span></td>
+                    <td>
+                      <div class="score-bar"><div class="fill fill-76"></div></div>
+                    </td>
+                    <td><span class="severity-badge high">HIGH</span></td>
+                  </tr>
+                  <tr style="cursor: pointer;" onclick="viewAssetFromOverview('STORAGE-DCE-001')">
+                    <td><span class="rank-circle rank-3">5</span></td>
+                    <td>STORAGE-DCE-001</td>
+                    <td><span class="type-badge type-storage">STORAGE</span></td>
+                    <td>
+                      <div class="score-bar"><div class="fill fill-68"></div></div>
+                    </td>
+                    <td><span class="severity-badge high">HIGH</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Recent AI Activity -->
+          <div class="card recent-activity-section">
+            <div class="section-header" style="margin-bottom: 12px;">
+              <h3>RECENT AI ACTIVITY</h3>
+              <a href="#" class="view-all">View All Activity &rarr;</a>
+            </div>
+            <div class="activity-timeline">
+              <div class="activity-item">
+                <div class="activity-icon green-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-healthy)" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                <div class="activity-details">
+                  <span class="time">22:18</span>
+                  <h4>Risk evaluation completed</h4>
+                  <p>All assets assessed</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon purple-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                  </svg>
+                </div>
+                <div class="activity-details">
+                  <span class="time">22:17</span>
+                  <h4>OpenClaw generated recommendations</h4>
+                  <p>4 assets analyzed</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon blue-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-info)" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                  </svg>
+                </div>
+                <div class="activity-details">
+                  <span class="time">22:16</span>
+                  <h4>DefenseClaw executed patch on GPU-DCE-002</h4>
+                  <p>Risk reduced by 41%</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon orange-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                  </svg>
+                </div>
+                <div class="activity-details">
+                  <span class="time">22:15</span>
+                  <h4>GPU-DCE-001 isolated</h4>
+                  <p>AI workload drained successfully</p>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon blue-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-info)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                </div>
+                <div class="activity-details">
+                  <span class="time">22:14</span>
+                  <h4>Threat intel updated</h4>
+                  <p>New CVEs ingested (12 high severity)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE: ASSETS -->
+      <div id="page-assets" class="page-view">
+        <div class="content-wrapper">
+        
+        <!-- CENTER PANEL (ASSETS WORKSPACE) -->
+        <section class="assets-workspace">
+          <div class="workspace-header">
+            <h1 class="workspace-title">Asset Inventory</h1>
+            <p class="workspace-subtitle">View and manage all datacenter assets</p>
+          </div>
+          
+          <!-- SUMMARY STATS CARDS -->
+          <div class="summary-cards">
+            <!-- GPU Servers Card -->
+            <div class="summary-card" data-filter-type="GPU Server">
+              <div class="card-icon gpu-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="2" ry="2"/>
+                  <rect x="6" y="6" width="12" height="12" rx="1"/>
+                  <line x1="9" y1="1" x2="9" y2="2"/>
+                  <line x1="15" y1="1" x2="15" y2="2"/>
+                  <line x1="9" y1="22" x2="9" y2="23"/>
+                  <line x1="15" y1="22" x2="15" y2="23"/>
+                  <line x1="1" y1="9" x2="2" y2="9"/>
+                  <line x1="1" y1="15" x2="2" y2="15"/>
+                  <line x1="22" y1="9" x2="23" y2="9"/>
+                  <line x1="22" y1="15" x2="23" y2="15"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <span class="card-title">GPU Servers</span>
+                <span class="card-value" id="gpu-count">4</span>
+              </div>
+            </div>
+            
+            <!-- CPU Servers Card -->
+            <div class="summary-card" data-filter-type="CPU Server">
+              <div class="card-icon cpu-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="4" width="16" height="16" rx="2"/>
+                  <rect x="9" y="9" width="6" height="6"/>
+                  <line x1="9" y1="1" x2="9" y2="4"/>
+                  <line x1="15" y1="1" x2="15" y2="4"/>
+                  <line x1="9" y1="20" x2="9" y2="23"/>
+                  <line x1="15" y1="20" x2="15" y2="23"/>
+                  <line x1="1" y1="9" x2="4" y2="9"/>
+                  <line x1="1" y1="15" x2="4" y2="15"/>
+                  <line x1="20" y1="9" x2="23" y2="9"/>
+                  <line x1="20" y1="15" x2="23" y2="15"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <span class="card-title">CPU Servers</span>
+                <span class="card-value" id="cpu-count">5</span>
+              </div>
+            </div>
+            
+            <!-- Leaf Switches Card -->
+            <div class="summary-card" data-filter-type="Leaf Switch">
+              <div class="card-icon leaf-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="5" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="2" y1="10" x2="22" y2="10"/>
+                  <circle cx="6" cy="15" r="1.5" fill="currentColor"/>
+                  <circle cx="12" cy="15" r="1.5" fill="currentColor"/>
+                  <circle cx="18" cy="15" r="1.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <span class="card-title">Leaf Switches</span>
+                <span class="card-value" id="leaf-count">2</span>
+              </div>
+            </div>
+            
+            <!-- Spine Switches Card -->
+            <div class="summary-card" data-filter-type="Spine Switch">
+              <div class="card-icon spine-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="5" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M6 9h12M12 5v14" stroke-dasharray="1 1"/>
+                  <circle cx="6" cy="15" r="1" fill="currentColor"/>
+                  <circle cx="18" cy="15" r="1" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <span class="card-title">Spine Switches</span>
+                <span class="card-value" id="spine-count">1</span>
+              </div>
+            </div>
+            
+            <!-- Storage Systems Card -->
+            <div class="summary-card" data-filter-type="Storage System">
+              <div class="card-icon storage-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 5c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z"/>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                </svg>
+              </div>
+              <div class="card-content">
+                <span class="card-title">Storage Systems</span>
+                <span class="card-value" id="storage-count">1</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- CONTROLS & FILTER BAR -->
+          <div class="filters-bar">
+            <div class="filter-dropdowns">
+              <!-- Type Dropdown -->
+              <div class="custom-select" id="type-select">
+                <div class="select-trigger">
+                  <span class="trigger-label">All Types</span>
+                  <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="select-options">
+                  <div class="select-option active" data-value="all">All Types</div>
+                  <div class="select-option" data-value="GPU Server">GPU Server</div>
+                  <div class="select-option" data-value="CPU Server">CPU Server</div>
+                  <div class="select-option" data-value="Leaf Switch">Leaf Switch</div>
+                  <div class="select-option" data-value="Spine Switch">Spine Switch</div>
+                  <div class="select-option" data-value="Storage System">Storage System</div>
+                </div>
+              </div>
+              
+              <!-- Zone Dropdown -->
+              <div class="custom-select" id="zone-select">
+                <div class="select-trigger">
+                  <span class="trigger-label">All Zones</span>
+                  <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="select-options">
+                  <div class="select-option active" data-value="all">All Zones</div>
+                  <div class="select-option" data-value="Zone-A">Zone-A</div>
+                  <div class="select-option" data-value="Zone-B">Zone-B</div>
+                  <div class="select-option" data-value="Zone-C">Zone-C</div>
+                </div>
+              </div>
+              
+              <!-- Status Dropdown -->
+              <div class="custom-select" id="status-select">
+                <div class="select-trigger">
+                  <span class="trigger-label">All Status</span>
+                  <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="select-options">
+                  <div class="select-option active" data-value="all">All Status</div>
+                  <div class="select-option" data-value="RUNNING">RUNNING</div>
+                  <div class="select-option" data-value="UP">UP</div>
+                  <div class="select-option" data-value="DEGRADED">DEGRADED</div>
+                  <div class="select-option" data-value="WARNING">WARNING</div>
+                  <div class="select-option" data-value="HEALTHY">HEALTHY</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="filter-actions">
+              <!-- Search bar -->
+              <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" id="search-input" placeholder="Search by name, IP or ID" autocomplete="off">
+              </div>
+              
+              <!-- Filters Toggle Button -->
+              <button class="btn-filters" id="btn-filters-toggle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                </svg>
+                <span>Filters</span>
+                <span class="badge">2</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- ASSET TABLE -->
+          <div class="table-container">
+            <table class="assets-table" id="assets-table">
+              <thead>
+                <tr>
+                  <th class="col-checkbox">
+                    <input type="checkbox" id="select-all-assets">
+                  </th>
+                  <th class="sortable" data-sort="id">ASSET <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="type">TYPE <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="zone">ZONE <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="health">HEALTH <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="risk">RISK SCORE <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="criticality">CRITICALITY <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="status">STATUS <span class="sort-icon">↕</span></th>
+                  <th class="sortable" data-sort="ip">IP ADDRESS <span class="sort-icon">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="table-body">
+                <!-- Javascript will populate this -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- TABLE PAGINATION FOOTER -->
+          <div class="table-footer">
+            <span class="showing-text" id="showing-text">Showing 1 to 10 of 20 assets</span>
+            <div class="pagination-controls">
+              <button class="btn-page" id="btn-prev" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div class="page-numbers" id="page-numbers">
+                <!-- Javascript will render pagination buttons -->
+              </div>
+              <button class="btn-page" id="btn-next">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+            <div class="page-size-selector">
+              <div class="custom-select mini" id="page-size-select">
+                <div class="select-trigger">
+                  <span class="trigger-label">10 / page</span>
+                  <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="select-options">
+                  <div class="select-option active" data-value="10">10 / page</div>
+                  <div class="select-option" data-value="20">20 / page</div>
+                  <div class="select-option" data-value="50">50 / page</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- RIGHT PANEL (SELECTED ASSET DETAILS) -->
+        <aside class="details-panel" id="details-panel">
+          <div class="panel-header-actions">
+            <span class="panel-title">SELECTED ASSET</span>
+            <div class="header-btns">
+              <!-- Export Dropdown -->
+              <div class="custom-select compact" id="export-select">
+                <div class="select-trigger">
+                  <span>Export</span>
+                  <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="select-options">
+                  <div class="select-option" data-value="csv">Export CSV</div>
+                  <div class="select-option" data-value="pdf">Export PDF</div>
+                  <div class="select-option" data-value="json">Export JSON</div>
+                </div>
+              </div>
+              <!-- Refresh button -->
+              <button class="btn-icon-only" id="btn-refresh-asset" title="Refresh Details">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- SELECTED ASSET MAIN HEADER CARD -->
+          <div class="asset-main-header">
+            <div class="asset-identity">
+              <div class="asset-hex-logo" id="detail-hex-logo">
+                <svg viewBox="0 0 100 100" class="detail-logo-svg">
+                  <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <path d="M32,60 C32,50 40,46 50,46 C60,46 68,50 68,60 C68,70 59,74 50,74 C41,74 32,70 32,60 Z" fill="currentColor"/>
+                  <ellipse cx="28" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(-20 28 42)"/>
+                  <ellipse cx="42" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(-5 42 30)"/>
+                  <ellipse cx="58" cy="30" rx="7" ry="9" fill="currentColor" transform="rotate(5 58 30)"/>
+                  <ellipse cx="72" cy="42" rx="6" ry="8" fill="currentColor" transform="rotate(20 72 42)"/>
+                </svg>
+              </div>
+              <div class="asset-title-group">
+                <h2 class="asset-id-text" id="detail-asset-id">GPU-DCE-001</h2>
+                <p class="asset-desc-text" id="detail-asset-desc">GPU Server · NVIDIA H100 · S/N: G100-AX12F8</p>
+              </div>
+            </div>
+            <div class="asset-criticality-badge" id="detail-criticality-badge">CRITICAL</div>
+          </div>
+          
+          <!-- CORE INDICATORS GRID -->
+          <div class="core-indicators">
+            <div class="indicator-box">
+              <span class="indicator-title">RISK SCORE</span>
+              <span class="indicator-value text-critical" id="detail-risk-score">10.0</span>
+              <span class="indicator-status text-critical" id="detail-risk-label">CRITICAL</span>
+            </div>
+            <div class="indicator-box">
+              <span class="indicator-title">HEALTH STATUS</span>
+              <span class="indicator-value status-indicator text-warning" id="detail-health-status">
+                <span class="status-dot warning"></span>
+                <span class="val-text">DEGRADED</span>
+              </span>
+            </div>
+            <div class="indicator-box">
+              <span class="indicator-title">STATUS</span>
+              <span class="indicator-value status-indicator text-healthy" id="detail-status">RUNNING</span>
+            </div>
+            <div class="indicator-box">
+              <span class="indicator-title">ZONE</span>
+              <span class="indicator-value text-white" id="detail-zone">Zone-A</span>
+            </div>
+          </div>
+          
+          <!-- DETAILS PANEL TABS -->
+          <div class="panel-tabs">
+            <button class="tab-btn active" data-tab="overview">Overview</button>
+            <button class="tab-btn" data-tab="vulnerabilities">Vulnerabilities (<span id="detail-vuln-count">5</span>)</button>
+            <button class="tab-btn" data-tab="workload">Workload</button>
+            <button class="tab-btn" data-tab="network">Network</button>
+            <button class="tab-btn" data-tab="timeline">Timeline</button>
+            <button class="tab-btn" data-tab="audit">Audit</button>
+          </div>
+          
+          <!-- TAB CONTENT CONTAINER -->
+          <div class="tab-content-container">
+            
+            <!-- OVERVIEW TAB PANEL -->
+            <div class="tab-panel active" id="tab-overview">
+              <div class="details-grid">
+                
+                <!-- Asset Information Card -->
+                <div class="detail-card info-card">
+                  <h3>Asset Information</h3>
+                  <div class="info-list">
+                    <div class="info-row"><span class="info-label">Asset ID</span><span class="info-val" id="info-id">GPU-DCE-001</span></div>
+                    <div class="info-row"><span class="info-label">Type</span><span class="info-val" id="info-type">GPU Server</span></div>
+                    <div class="info-row"><span class="info-label">Zone / Rack</span><span class="info-val" id="info-zone-rack">Zone-A / Rack-12</span></div>
+                    <div class="info-row"><span class="info-label">IP Address</span><span class="info-val text-blue" id="info-ip">10.10.10.21</span></div>
+                    <div class="info-row"><span class="info-label">OS Version</span><span class="info-val" id="info-os">Ubuntu 22.04 LTS</span></div>
+                    <div class="info-row"><span class="info-label">Last Seen</span><span class="info-val" id="info-last-seen">22 May 2025, 10:24:30</span></div>
+                    <div class="info-row"><span class="info-label">Owner</span><span class="info-val" id="info-owner">AI Platform Team</span></div>
+                    <div class="info-row"><span class="info-label">Environment</span><span class="info-val" id="info-env">Production</span></div>
+                  </div>
+                </div>
+                
+                <!-- Top CVEs Card -->
+                <div class="detail-card cves-card">
+                  <div class="card-header-flex">
+                    <h3>Top CVEs</h3>
+                    <a href="#" class="view-all-link" id="link-view-all-cves">View All</a>
+                  </div>
+                  <div class="cves-list" id="detail-cves-list">
+                    <!-- Javascript populated -->
+                  </div>
+                </div>
+                
+                <!-- Running Workload Card -->
+                <div class="detail-card workload-card">
+                  <h3>Running Workload</h3>
+                  <div class="workload-header-row">
+                    <div class="workload-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                      </svg>
+                    </div>
+                    <div class="workload-info-title">
+                      <span class="workload-label">Running Workload</span>
+                      <span class="workload-name" id="workload-name">AI Training</span>
+                    </div>
+                  </div>
+                  <div class="info-list">
+                    <div class="info-row"><span class="info-label">Model</span><span class="info-val" id="workload-model">LLM Training (v2.3)</span></div>
+                    <div class="info-row">
+                      <span class="info-label">Utilization</span>
+                      <span class="info-val" id="workload-util">92%</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">GPU Memory</span>
+                      <span class="info-val" id="workload-mem">78% (624 GB / 800 GB)</span>
+                    </div>
+                    <div class="info-row"><span class="info-label">Job ID</span><span class="info-val" id="workload-job-id">job-7f9a3c8d</span></div>
+                  </div>
+                  <a href="#" class="view-details-link">View Workload Details</a>
+                </div>
+                
+                <!-- Hardware & Configuration Card -->
+                <div class="detail-card hardware-card">
+                  <h3>Hardware & Configuration</h3>
+                  <div class="info-list">
+                    <div class="info-row"><span class="info-label">GPU Model</span><span class="info-val" id="hw-gpu">NVIDIA H100 SXM5</span></div>
+                    <div class="info-row"><span class="info-label">GPU Driver</span><span class="info-val" id="hw-driver">535.104.05</span></div>
+                    <div class="info-row"><span class="info-label">vCPU / Memory</span><span class="info-val" id="hw-cpu-mem">64 vCPU / 512 GB</span></div>
+                    <div class="info-row"><span class="info-label">Storage</span><span class="info-val" id="hw-storage">7.6 TB NVMe</span></div>
+                    <div class="info-row"><span class="info-label">Power Usage</span><span class="info-val" id="hw-power">680 W</span></div>
+                    <div class="info-row"><span class="info-label">Temperature</span><span class="info-val text-warning font-semibold" id="hw-temp">72 °C</span></div>
+                  </div>
+                </div>
+                
+                <!-- Risk Contribution Card (Donut Chart) -->
+                <div class="detail-card risk-card">
+                  <h3>Risk Contribution</h3>
+                  <div class="risk-chart-wrapper">
+                    <div class="donut-chart-container">
+                      <svg viewBox="0 0 100 100" class="donut-svg" id="donut-chart-svg">
+                        <!-- Background Circle -->
+                        <circle cx="50" cy="50" r="38" fill="transparent" stroke="#121824" stroke-width="8"/>
+                        <!-- Dynamic segment circles will be injected by JavaScript -->
+                      </svg>
+                      <div class="donut-label">
+                        <span class="donut-score" id="donut-score-text">10.0</span>
+                        <span class="donut-sub">Total Risk</span>
+                      </div>
+                    </div>
+                    <div class="risk-legend" id="risk-legend-list">
+                      <!-- Populated by JavaScript -->
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Recommended Action Card -->
+                <div class="detail-card action-card">
+                  <h3>Recommended Action</h3>
+                  <div class="action-details">
+                    <div class="action-alert-badge" id="detail-action-badge">IMMEDIATE</div>
+                    <p class="action-alert-text" id="detail-action-text">Isolate this asset and apply security patches.</p>
+                  </div>
+                  <a href="#" class="view-details-link text-blue">View AI Recommendation &rarr;</a>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- OTHER TABS (DYNAMICALLY TOGGLED OR PLACEHOLDERS) -->
+            <div class="tab-panel" id="tab-vulnerabilities">
+              <div class="tab-panel-header">
+                <h3>Vulnerabilities & CVE Details</h3>
+                <span class="panel-subtitle">Comprehensive list of security vulnerabilities detected on this asset</span>
+              </div>
+              <div class="vuln-list-detailed" id="vuln-list-detailed">
+                <!-- Populated via JavaScript -->
+              </div>
+            </div>
+            
+            <div class="tab-panel" id="tab-workload">
+              <div class="tab-panel-header">
+                <h3>Workload Performance & Analytics</h3>
+                <span class="panel-subtitle">AI model execution details, queue items, and GPU thread diagnostics</span>
+              </div>
+              <div class="workload-details-container">
+                <div class="workload-stats-grid">
+                  <div class="metric-card">
+                    <span class="metric-lbl">Active Epoch</span>
+                    <span class="metric-val">14 / 50</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-lbl">Loss Rate</span>
+                    <span class="metric-val text-healthy">0.0125</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-lbl">Throughput</span>
+                    <span class="metric-val">12,450 tokens/s</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-lbl">Est. Completion</span>
+                    <span class="metric-val">4h 12m</span>
+                  </div>
+                </div>
+                <div class="chart-placeholder">
+                  <span class="placeholder-text">GPU Hardware Monitor (Real-time bandwidth, floating points, and temperature)</span>
+                  <div class="simple-bar-graph">
+                    <div class="bar-col"><div class="bar-fill" style="height: 85%;"></div><span>GPU 0</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 94%;"></div><span>GPU 1</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 90%;"></div><span>GPU 2</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 88%;"></div><span>GPU 3</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 72%;"></div><span>GPU 4</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 65%;"></div><span>GPU 5</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 95%;"></div><span>GPU 6</span></div>
+                    <div class="bar-col"><div class="bar-fill" style="height: 91%;"></div><span>GPU 7</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-panel" id="tab-network">
+              <div class="tab-panel-header">
+                <h3>Network Links & Security Zones</h3>
+                <span class="panel-subtitle">VLANs, Switches, Ports, and active firewall rules for this asset</span>
+              </div>
+              <div class="network-details-list">
+                <div class="network-link-row">
+                  <div class="link-info">
+                    <span class="link-name">Switch Port Uplink</span>
+                    <span class="link-meta">Port eth1/42 &bull; VLAN 100</span>
+                  </div>
+                  <span class="link-status text-healthy">CONNECTED (100 Gbps)</span>
+                </div>
+                <div class="network-link-row">
+                  <div class="link-info">
+                    <span class="link-name">Security Policy</span>
+                    <span class="link-meta">Zone-A Trusted Database Access Rule</span>
+                  </div>
+                  <span class="link-status text-warning">INSPECTED</span>
+                </div>
+                <div class="network-link-row">
+                  <div class="link-info">
+                    <span class="link-name">Active Connections</span>
+                    <span class="link-meta">14 active sockets &bull; 8 external IPs</span>
+                  </div>
+                  <span class="link-status text-healthy">NORMAL</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-panel" id="tab-timeline">
+              <div class="tab-panel-header">
+                <h3>Asset Security Timeline</h3>
+                <span class="panel-subtitle">Recent security incidents, health flags, and workload state transitions</span>
+              </div>
+              <div class="timeline-container" id="detail-timeline-list">
+                <!-- Populated via JavaScript -->
+              </div>
+            </div>
+            
+            <div class="tab-panel" id="tab-audit">
+              <div class="tab-panel-header">
+                <h3>Compliance & Audit Logs</h3>
+                <span class="panel-subtitle">Configuration changes, policy updates, and administrator access history</span>
+              </div>
+              <div class="audit-logs-list">
+                <div class="audit-row">
+                  <div class="audit-meta">
+                    <span class="audit-time">22 May 2025, 09:15:10</span>
+                    <span class="audit-user">by SecOps-Agent-AI</span>
+                  </div>
+                  <span class="audit-message">Automated vulnerability scans performed, 2 new CVEs flagged.</span>
+                </div>
+                <div class="audit-row">
+                  <div class="audit-meta">
+                    <span class="audit-time">19 May 2025, 14:22:04</span>
+                    <span class="audit-user">by Admin (Security Team)</span>
+                  </div>
+                  <span class="audit-message">Workload routing updated to optimize GPU temperature overhead.</span>
+                </div>
+                <div class="audit-row">
+                  <div class="audit-meta">
+                    <span class="audit-time">10 May 2025, 08:00:00</span>
+                    <span class="audit-user">System (Cron)</span>
+                  </div>
+                  <span class="audit-message">Security policy compliance verification checklist completed: 100% compliant.</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <!-- PANEL BOTTOM BUTTONS -->
+          <div class="panel-bottom-actions">
+            <button class="btn-secondary" id="btn-investigate">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <span>Investigate Asset</span>
+            </button>
+            <button class="btn-primary" id="btn-remediate">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+              <span>Generate AI Plan</span>
+            </button>
+          </div>
+        </aside>
+        
+        </div>
+      </div>
+      
+    </main>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
